@@ -48,6 +48,36 @@ const commande = {
 };
 
 let { id, total } = commande;
+let { client: { nom } } = commande;
+let { total:montant, livree:estLivree } = commande;
+
+function resumeCommande({ id, client, total }) {
+  return `Commande ${id} - ${client.nom} - ${total} EUR`
+}
+
+// Exercice 4 -- CRUD sur un tableau d'objets
+let catalogue = [
+{ id:1, nom:'Stylo bille', prix:1.20, stock:150 },
+{ id:1, nom:'Styloivjs bille', prix:1.20, stock:150 },
+{ id:2, nom:'Cahier A4', prix:3.50, stock:45 },
+{ id:3, nom:'Surligneur', prix:2.10, stock:80 },
+{ id:4, nom:'Post-it', prix:3.80, stock:60 },
+{ id:5, nom:'Ciseaux', prix:6.30, stock:20 },
+];
+
+function ajouterProduit(catalogue, produit) {
+  let {id} = catalogue.sort((a,b)=>b.id-a.id)[0].id;
+  let dz = [...catalogue,{id,...produit}];
+  return dz;
+}
+
+function rechercherParNom(catalogue, terme) {
+  let found = catalogue.filter(item=>item.nom.toLowerCase().includes(terme));
+  return found;
+}
+console.log(rechercherParNom(catalogue, 'Stylo'));
+
+
 
 // PARTIE 2 -- Challenges Intermédiaires
 

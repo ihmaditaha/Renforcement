@@ -79,7 +79,7 @@ console.log(notes.reduce((n, val) => (val < avrg ? n + 1 : n), 0));
 function nettoyer(tableau) {
   let cleanedArray = tableau.filter((element) => element).sort((a, b) => a - b);
   console.log(cleanedArray);
-  
+  cleanedArray.indexOf();
   cleanedArray.forEach((element, index) => {
     if (element == cleanedArray[index + 1]) {
       cleanedArray.splice(index, 1);
@@ -97,17 +97,30 @@ nettoyer([0, 0, 0]);
 
 function rotate(tableau, n) {
   let number = n % tableau.length;
-  console.log("mod "+number);
-  
-  return [
-    ...tableau.slice(number, tableau.length+1),
-    ...tableau.slice(0, number)
-  ];
+  console.log("mod " + number);
+  return [...tableau.slice(-number), ...tableau.slice(0, -number)];
 }
 console.log(rotate([1, 2, 3, 4, 5], 2));
-console.log(rotate([1, 2, 3, 4, 5], 7));
+console.log(rotate([1, 2, 3, 4, 5, 6, 7, 8], 5));
 console.log(rotate([1, 2, 3, 4, 5], 0));
 console.log(rotate(["a", "b", "c"], 1));
-console.log(rotate([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 7));
+console.log(rotate([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 6));
 
+// Exercice I3 -- Aplatisseur
+
+function flatten(tableau) {
+  let flattened = [];
+  tableau.forEach((item) => {
+    if (Array.isArray(item)) {
+      flattened = flattened.concat(flatten(item));
+    } else {
+      flattened.push(item);
+    }
+  });
+
+  return flattened;
+}
+
+let arr = flatten([1, [2, 3,[1, [2, 3,]]]]);
+console.log(arr);
 // PARTIE 3 -- Challenges Avances
